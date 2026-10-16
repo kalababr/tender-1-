@@ -1,0 +1,1100 @@
+/* ==========================================================================
+   TenderHub - design tokens
+   Style: modern minimal. Warm near-white canvas, near-black ink,
+   one electric lime accent. Dark surfaces are true black, not navy.
+   ========================================================================== */
+
+:root {
+  /* --- raw palette ------------------------------------------------------ */
+  --black: #0a0a09;
+  --ink-900: #0e0e0c;
+  --ink-700: #2a2a26;
+  --grey-500: #6b6b64;
+  --grey-400: #9a9a91;
+  --grey-300: #d3d0c8;
+  --grey-200: #e6e4de;
+  --grey-100: #f1f0ec;
+  --paper: #fafaf7;
+  --white: #ffffff;
+
+  --lime: #c9f24d;
+  --lime-deep: #aeda1e;
+  --lime-tint: #f4fcd9;
+
+  /* --- semantic tokens (light) ----------------------------------------- */
+  --bg: var(--paper);
+  --surface: var(--white);
+  --surface-2: var(--grey-100);
+  --ink: var(--ink-900);
+  --muted: var(--grey-500);
+  --line: var(--grey-200);
+  --line-strong: var(--grey-300);
+
+  /* Near-black carries primary actions; lime is reserved for accents
+     and is always paired with --accent-ink, never white. */
+  --brand: var(--ink-900);
+  --brand-strong: var(--black);
+  --brand-soft: var(--grey-100);
+  --on-brand: var(--white);
+  --brand-hover: #26261f;
+
+  --accent: var(--lime);
+  --accent-hover: var(--lime-deep);
+  --accent-ink: var(--ink-900);
+  --accent-soft: var(--lime-tint);
+
+  --focus: var(--ink-900);
+
+  /* --- typography ------------------------------------------------------- */
+  --font-display: 'Manrope', 'Noto Sans Ethiopic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', 'Noto Sans Ethiopic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 1.875rem);
+  --text-2xl: clamp(1.875rem, 1.4rem + 2vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem);
+
+  /* --- 8dp spacing rhythm ---------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* --- radii ------------------------------------------------------------ */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-full: 999px;
+
+  /* --- elevation (used sparingly) -------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(14, 14, 12, 0.05);
+  --shadow-md: 0 10px 30px -14px rgba(14, 14, 12, 0.2);
+  --shadow-lg: 0 28px 70px -28px rgba(14, 14, 12, 0.3);
+
+  --wrap: 1200px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: var(--black);
+    --surface: #141413;
+    --surface-2: #1e1e1c;
+    --ink: #f5f5f0;
+    --muted: #9a9a91;
+    --line: rgba(245, 245, 240, 0.14);
+    --line-strong: rgba(245, 245, 240, 0.26);
+
+    --brand: #f5f5f0;
+    --brand-strong: #000000;
+    --brand-soft: rgba(245, 245, 240, 0.08);
+    --on-brand: var(--black);
+    --brand-hover: #d9d9d2;
+
+    --accent: var(--lime);
+    --accent-ink: var(--ink-900);
+    --accent-soft: rgba(201, 242, 77, 0.14);
+
+    --focus: var(--lime);
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-padding-top: 132px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+/* Skip link - visible only once focused. */
+.hb-skip {
+  position: fixed;
+  inset-inline-start: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-3) var(--space-5);
+  background: var(--brand-strong);
+  color: #fff;
+  border-radius: 0 0 var(--r-md) var(--r-md);
+  font-weight: 600;
+  transition: top 0.2s var(--ease);
+}
+.hb-skip:focus {
+  top: 0;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--on-brand);
+  background: var(--brand);
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background-color 0.18s var(--ease), border-color 0.18s var(--ease),
+    color 0.18s var(--ease);
+}
+.btn:hover {
+  background: var(--brand-hover);
+}
+.btn.sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+}
+/* Lime fill - always paired with --accent-ink so contrast stays high. */
+.btn.light {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+.btn.light:hover {
+  background: var(--accent-hover);
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@keyframes hb-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js .hb-hero-copy,
+.js .hb-card {
+  animation: hb-in 0.7s var(--ease) both;
+}
+.js .hb-hero-copy {
+  animation-delay: 0.05s;
+}
+.js .hb-card {
+  animation-delay: 0.15s;
+}
+
+.js .rv {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease) var(--d, 0ms),
+    transform 0.7s var(--ease) var(--d, 0ms), background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+.js .rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .rv {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Section scaffolding
+   ========================================================================== */
+
+section.s {
+  padding-block: var(--space-9) var(--space-8);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: end;
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--line);
+}
+.head h2 {
+  font-size: var(--text-2xl);
+  max-width: 16ch;
+}
+.head p {
+  color: var(--muted);
+  font-size: var(--text-lg);
+  max-width: 46ch;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+/* On dark surfaces the near-black eyebrow would vanish - use the accent. */
+.hb-hero .eyebrow,
+.cta .eyebrow {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Directory grid
+   ========================================================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 168px;
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+.cell:hover {
+  border-color: var(--brand);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.cell.all {
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+  color: #fff;
+}
+.cell.all:hover {
+  border-color: var(--brand);
+}
+.cell b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cell span {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+.cell.all span {
+  color: rgba(255, 255, 255, 0.7);
+}
+.cell svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.6;
+}
+.cell.all svg {
+  stroke: var(--accent);
+}
+
+/* ==========================================================================
+   Pricing
+   ========================================================================== */
+
+.promo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.plan:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+.plan.hot {
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+  color: #fff;
+}
+.plan.hot p,
+.plan.hot li {
+  color: rgba(255, 255, 255, 0.78);
+}
+.plan h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+.plan p {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.plan ul {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin-top: var(--space-2);
+  list-style: none;
+  font-size: var(--text-sm);
+}
+.plan li {
+  position: relative;
+  padding-inline-start: 24px;
+}
+.plan li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--brand);
+  border-bottom: 2px solid var(--brand);
+  transform: rotate(-45deg);
+}
+.plan.hot li::before {
+  border-color: var(--accent);
+}
+.hb-ribbon {
+  position: absolute;
+  top: var(--space-4);
+  inset-inline-end: var(--space-4);
+  padding: 2px var(--space-2);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: var(--r-sm);
+}
+.plan-cta {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Contact zone - light band; the form card is the only raised element
+   ========================================================================== */
+
+.hb-zone {
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--space-9);
+  padding-block: var(--space-9);
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+.hb-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(46% 64% at 4% 0%, rgba(201, 242, 77, 0.22), transparent 62%);
+}
+.hb-zone-in {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-9);
+  align-items: start;
+}
+.hb-zone-intro h2 {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  max-width: 12ch;
+}
+.hb-zone-lead {
+  max-width: 44ch;
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+  color: var(--muted);
+}
+
+.hb-methods {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0;
+  margin-top: var(--space-7);
+  list-style: none;
+}
+.hb-methods li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: border-color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.hb-methods li:hover {
+  border-color: var(--brand);
+  transform: translateX(3px);
+}
+.hb-method-ico {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: var(--r-md);
+}
+.hb-method-ico svg {
+  width: 21px;
+  height: 21px;
+}
+.hb-method-lbl {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hb-methods a,
+.hb-methods b {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+.hb-methods a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hb-zone-form {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+.hb-zone-form h3 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+.hb-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+.hb-zone-form label {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--muted);
+}
+.hb-zone-form input,
+.hb-zone-form textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+}
+.hb-zone-form input:hover,
+.hb-zone-form textarea:hover {
+  border-color: var(--brand);
+}
+.hb-zone-form textarea {
+  min-height: 128px;
+  resize: vertical;
+}
+.hb-zone-form .btn {
+  justify-self: start;
+  gap: var(--space-3);
+  padding-inline: var(--space-6);
+}
+.hb-zone-form .btn svg {
+  width: 16px;
+  height: 16px;
+}
+.hb-zone-form .ok {
+  min-height: 1.6em;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   CTA banner - the one lime moment on the page
+   ========================================================================== */
+
+.cta {
+  margin-block: var(--space-5) var(--space-4);
+  padding: var(--space-7) var(--space-5);
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: var(--r-lg);
+}
+.cta-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: center;
+}
+.cta h2 {
+  max-width: 18ch;
+  font-size: var(--text-2xl);
+  font-weight: 800;
+}
+.cta p {
+  max-width: 52ch;
+  margin-top: var(--space-3);
+  color: rgba(14, 14, 12, 0.7);
+}
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+/* The CTA banner is always lime in both schemes, so this button deliberately
+   uses the non-inverting raw palette tokens rather than --brand / --on-brand. */
+.cta .cta-btn {
+  padding: var(--space-4) var(--space-6);
+  color: var(--white);
+  background: var(--ink-900);
+}
+.cta .cta-btn:hover {
+  background: var(--ink-700);
+}
+.cta-alt {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+  color: rgba(14, 14, 12, 0.75);
+}
+.cta-alt:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ==========================================================================
+   News
+   ========================================================================== */
+
+.news {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 232px;
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+.post:hover {
+  border-color: var(--brand);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.post .meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+.post .tag {
+  padding: 2px var(--space-2);
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--brand-soft);
+  border-radius: var(--r-sm);
+}
+.post h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.post .more {
+  margin-top: auto;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--brand);
+}
+.post .more::after {
+  content: ' \2192';
+}
+.news-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+/* ==========================================================================
+   Contact zone - see above
+   ========================================================================== */
+
+/* ==========================================================================
+   Chat widget
+   ========================================================================== */
+
+.chat-fab {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 40;
+  gap: var(--space-3);
+  padding-inline: var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+.chat-fab svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.chat-fab::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  inset-inline-end: -3px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+}
+.chat-fab[aria-expanded='true']::after {
+  display: none;
+}
+.chat {
+  position: fixed;
+  right: var(--space-5);
+  bottom: calc(var(--space-5) + 60px);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  width: min(360px, calc(100vw - 2 * var(--space-4)));
+  max-height: min(520px, calc(100svh - 140px));
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+}
+.chat header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: #fff;
+  background: var(--brand-strong);
+}
+.chat header::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.chat header span {
+  flex: 1;
+}
+.chat header button {
+  padding: 0 var(--space-1);
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: color 0.18s var(--ease);
+}
+.chat header button:hover {
+  color: #fff;
+}
+.chat .msgs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  overflow-y: auto;
+  background: var(--bg);
+}
+.chat .msg {
+  align-self: flex-start;
+  max-width: 84%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+.chat .msg.me {
+  align-self: flex-end;
+  color: var(--on-brand);
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.chat form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+.chat input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  background: transparent;
+  border: 0;
+}
+
+/* ==========================================================================
+   Footer - deepest surface, so it separates from the contact zone above
+   ========================================================================== */
+
+footer {
+  padding-block: var(--space-8) var(--space-6);
+  font-size: var(--text-sm);
+  background: var(--brand-strong);
+  color: rgba(255, 255, 255, 0.64);
+}
+.hb-f-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+  gap: var(--space-7);
+}
+.hb-f-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: #fff;
+}
+.hb-mark {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 28%, var(--brand) 30% 55%, var(--accent) 57%);
+}
+.hb-f-blurb {
+  max-width: 38ch;
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+}
+.hb-f-col h3 {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+footer nav,
+.hb-f-contact {
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+footer nav a:hover,
+.hb-f-contact a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.hb-f-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  font-size: var(--text-xs);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.hb-f-bottom a:hover {
+  color: #fff;
+}
+/* Social links: shown in the utility topbar on wide screens, and in the
+   footer below 640px where the topbar runs out of room. */
+.topbar-social,
+.footer-social {
+  display: flex;
+  gap: var(--space-2);
+}
+.footer-social {
+  display: none;
+  margin-top: var(--space-5);
+}
+.topbar-social a {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: color 0.18s var(--ease), background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+.topbar-social a:hover {
+  color: var(--on-brand);
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  transition: color 0.18s var(--ease), background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+.footer-social a:hover {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   Scrollbar
+   ========================================================================== */
+
+html {
+  --sb: var(--brand);
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb) var(--surface-2);
+}
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface-2);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--sb);
+    border: 3px solid var(--surface-2);
+    border-radius: var(--r-full);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .head,
+  .promo,
+  .news {
+    grid-template-columns: 1fr;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hb-zone-in,
+  .cta-in {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+  .cta-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .cta-alt {
+    text-align: left;
+  }
+  .hb-f-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hb-zone {
+    margin-top: var(--space-8);
+    padding-block: var(--space-8);
+  }
+  section.s {
+    padding-block: var(--space-8) var(--space-7);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid,
+  .hb-f-grid,
+  .hb-form-row {
+    grid-template-columns: 1fr;
+  }
+  /* Topbar is too tight for socials here, so fall back to the footer. */
+  .topbar-social {
+    display: none;
+  }
+  .footer-social {
+    display: flex;
+  }
+  .hb-zone-form {
+    padding: var(--space-5);
+  }
+  .cta {
+    padding: var(--space-6) var(--space-4);
+  }
+  .chat-fab,
+  .chat {
+    right: var(--space-3);
+  }
+}
+
+/* Amharic runs taller - drop the tight display tracking. */
+html[lang='am'] h1,
+html[lang='am'] h2,
+html[lang='am'] h3 {
+  letter-spacing: 0;
+  line-height: 1.35;
+}

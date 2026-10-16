@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>TenderHub</title>
+    <meta
+      name="description"
+      content="TenderHub lists every open tender in Ethiopia, a verified business directory, and alerts so you never miss a deadline."
+    />
+    <meta name="theme-color" content="#0e0e0c" />
+    <!-- Empty data URI: suppresses the automatic /favicon.ico request so no
+         404 is made. Remove this line if a favicon is added later. -->
+    <link rel="icon" href="data:," />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TenderHub" />
+    <meta property="og:title" content="TenderHub – Find tenders. Find suppliers. Win business." />
+    <meta
+      property="og:description"
+      content="Every open tender in Ethiopia, a verified supplier directory, and daily alerts."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Marks the document as JS-capable so reveal animations only hide content
+      // when the IntersectionObserver hook is able to show it again.
+      document.documentElement.classList.add('js')
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 24px; font-family: system-ui, sans-serif">
+        TenderHub needs JavaScript enabled to display tenders and the business directory.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
